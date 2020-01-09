@@ -1,14 +1,25 @@
 <template>
-  <div><ros-dynamic-reconfigure-topic v-for="(topic, index) in topics" :key="index" :topic="topic"></ros-dynamic-reconfigure-topic></div>
+  <v-expansion-panel popout>
+    <v-expansion-panel-content
+      v-for="(node, index) in nodes" :key="index"
+    >
+      <template v-slot:header>
+        <div>{{node}}</div>
+      </template>
+      <v-card>
+        <ros-dynamic-reconfigure-node :node="node" :ros="ros"></ros-dynamic-reconfigure-node>
+      </v-card>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
 </template>
 
 <script>
-import RosDynamicReconfigureTopic from './RosDynamicReconfigureTopic.vue'
+import RosDynamicReconfigureNode from './RosDynamicReconfigureNode.vue'
 
 export default {
   name: 'ros-dynamic-reconfigure-list',
   components: {
-    RosDynamicReconfigureTopic
+    RosDynamicReconfigureNode
   },
   props: {
     ros: {
@@ -17,15 +28,15 @@ export default {
     }
   },
   data: () => ({
-    topics: []
+    nodes: []
   }),
   mounted() {
-    this.getTopics();
+    this.getNodes();
   },
   methods: {
-    getTopics() {
+    getNodes() {
       this.ros.getTopicsForType("dynamic_reconfigure/ConfigDescription", (topics) => {
-        this.topics = topics;
+        this.nodes = topics.map((topic) => topic.replace("/parameter_descriptions", ""));
       });
     },
   }
