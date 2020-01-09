@@ -178,8 +178,6 @@ export default {
         value: parameter.value
       })
 
-      console.log(request);
-
       this.reconfigureClient.callService(request, (result) => {
         this.parameterUpdateFeedback(result.config);
       });

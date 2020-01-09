@@ -334,9 +334,6 @@ var __vue_staticRenderFns__$2 = [];
 //
 //
 //
-//
-//
-//
 
 var script$3 = {
   name: 'ros-dynamic-reconfigure-bool',
@@ -350,7 +347,7 @@ var script$3 = {
 var __vue_script__$3 = script$3;
 
 /* template */
-var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"ros-dynamic-reconfigure-slider"},[_vm._ssrNode("<span"+(_vm._ssrClass(null,['name', 'pa-0', _vm.valid ? '' : 'error--text']))+">"+_vm._ssrEscape(_vm._s(_vm.value.name))+"</span> "),_c('v-checkbox',{attrs:{"label":_vm.value.name,"hint":_vm.value.description,"persistent-hint":true},on:{"change":_vm.change},model:{value:(_vm.value.value),callback:function ($$v) {_vm.$set(_vm.value, "value", $$v);},expression:"value.value"}})],2)};
+var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-checkbox',{attrs:{"label":_vm.value.name,"hint":_vm.value.description,"persistent-hint":true},on:{"change":_vm.change},model:{value:(_vm.value.value),callback:function ($$v) {_vm.$set(_vm.value, "value", $$v);},expression:"value.value"}})};
 var __vue_staticRenderFns__$3 = [];
 
   /* style */
@@ -358,7 +355,7 @@ var __vue_staticRenderFns__$3 = [];
   /* scoped */
   var __vue_scope_id__$3 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$3 = "data-v-1d7b66d9";
+  var __vue_module_identifier__$3 = "data-v-e58cb362";
   /* functional template */
   var __vue_is_functional_template__$3 = false;
   /* style inject */
@@ -638,8 +635,6 @@ var script$5 = {
         value: parameter.value
       });
 
-      console.log(request);
-
       this.reconfigureClient.callService(request, function (result) {
         this$1.parameterUpdateFeedback(result.config);
       });
@@ -663,7 +658,7 @@ var __vue_staticRenderFns__$5 = [];
   /* scoped */
   var __vue_scope_id__$5 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$5 = "data-v-67ca4792";
+  var __vue_module_identifier__$5 = "data-v-5dbfa6ba";
   /* functional template */
   var __vue_is_functional_template__$5 = false;
   /* style inject */

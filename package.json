@@ -1,8 +1,18 @@
 {
   "name": "vue-dynamic-reconfigure",
-  "version": "0.1.0",
-  "private": false,
+  "version": "0.1.1",
   "description": "Vue components for ROS dynamic_reconfigure",
+  "homepage": "https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "ros",
+    "dynamic_reconfigure"
+  ],
   "author": "Ludwig Waffenschmidt <ludwig.waffenschmidt@outlook.com>",
   "main": "dist/vue-dynamic-reconfigure.ssr.js",
   "module": "dist/vue-dynamic-reconfigure.esm.js",
@@ -10,10 +20,12 @@
   "files": [
     "dist/*",
     "src/**/*.vue",
-    "!src/lib-dev.vue"
+    "!src/App.vue",
+    "!src/main.vue"
   ],
   "scripts": {
     "serve": "vue-cli-service serve ./src/main.js",
+    "build-demo": "vue-cli-service build --dest demo ./src/main.js",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
@@ -50,11 +62,5 @@
     "vue-cli-plugin-vuetify": "^0.4.6",
     "vue-template-compiler": "^2.6.9",
     "vuetify-loader": "^1.2.1"
-  },
-  "keywords": [
-    "vue",
-    "vuejs",
-    "ros",
-    "dynamic_reconfigure"
-  ]
+  }
 }
