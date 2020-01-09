@@ -55,11 +55,10 @@ export default {
       this.error = "";
     });
     
-    this.ros.on('error', (err) => {
+    this.ros.on('error', () => {
       this.connecting = false;
       this.connected = false;
       this.error = "Can't connect. Make sure rosbridge_webserver is running.";
-      if (err) console.log(err);
     });
     
     this.ros.on('close', () => {
