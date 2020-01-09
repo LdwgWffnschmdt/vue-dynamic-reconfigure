@@ -1,11 +1,10 @@
 <template>
-  <ros-dynamic-reconfigure v-for="(item, index) in topics" :key="index" :is="item.component" v-bind="item"></ros-dynamic-reconfigure>
+  <!-- <ros-dynamic-reconfigure v-for="(item, index) in topics" :key="index" :is="item.component" v-bind="item"></ros-dynamic-reconfigure> -->
+  <div><v-card>{{ topic }}</v-card></div>
 </template>
 
 <script>
 import * as ROSLIB from 'roslib'
-
-import { setTimeout, clearTimeout } from 'timers';
 
 export default {
   name: 'ros-dynamic-reconfigure-topic',
@@ -20,7 +19,7 @@ export default {
     }
   },
   watch: {
-    topic(n) {
+    topic() {
       this.$nextTick(this.reload);
     }
   },
@@ -37,11 +36,15 @@ export default {
     },
     subscribe() {
       if (this.topic != "") {
-
+        this.debugTopic = new ROSLIB.Topic({
+          ros: this.ros,
+          name: this.topic,
+          messageType: "dynamic_reconfigure/ConfigDescription"
+        });
       }
     },
     unsubscribe() {
-
+      return;
     },
   },
   beforeDestroy() {
