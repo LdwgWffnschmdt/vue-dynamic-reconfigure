@@ -10,22 +10,28 @@
       >
         <ros-dynamic-reconfigure-list :ros="ros"/>
       </v-card>
-      <v-text-field
+      <v-card
         v-else
+        elevation="0"
         class="my-4 mx-auto"
-        color="primary"
-        style="max-width: 400px;"
-        v-model="address"
-        :append-icon="connecting ? '' : 'send'"
-        @click:append="connect"
-        outline
-        clearable
-        label="Address"
-        type="text"
-        :loading="connecting"
-        :error-messages="error"
+        color="transparent"
+        max-width="400"
       >
-      </v-text-field>
+        <div>Please enter your robot's websocket address below. Since this page is served via HTTPS, only scure websockets over WSS are supported.</div>
+        <v-text-field
+          color="primary"
+          v-model="address"
+          :append-icon="connecting ? '' : 'send'"
+          @click:append="connect"
+          outline
+          clearable
+          label="Address"
+          type="text"
+          :loading="connecting"
+          :error-messages="error"
+        >
+        </v-text-field>
+      </v-card>
     </v-content>
   </v-app>
 </template>
@@ -41,7 +47,7 @@ export default {
   },
   data: () => ({
     ros: null,
-    address: "ws://localhost:9090",
+    address: "wss://localhost:9090",
     connected: false,
     connecting: false,
     error: ""

@@ -1,6 +1,8 @@
-# vue-ros3djs
+# vue-dynamic-reconfigure
 
-Vue components for ROS [dynamic_reconfigure](http://wiki.ros.org/dynamic_reconfigure)
+Vue components for ROS [dynamic_reconfigure](http://wiki.ros.org/dynamic_reconfigure) that connect via websockets to a [rosbridge](http://wiki.ros.org/rosbridge_suite) running on your robot. The UI elements use [vuetify](https://v15.vuetifyjs.com/en/).
+
+🖥 You can find a **[demo](https://ldwgwffnschmdt.github.io/vue-dynamic-reconfigure/)** here (only supports secure websockets over WSS).
 
 ## Install
 ```

@@ -1,6 +1,6 @@
 {
   "name": "vue-dynamic-reconfigure",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vue components for ROS dynamic_reconfigure",
   "homepage": "https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure",
   "repository": {
@@ -37,7 +37,7 @@
     "core-js": "^3.4.4",
     "roboto-fontface": "*",
     "roslib": "^1.0.1",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vuetify": "^1.5.22"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
-    "vue-template-compiler": "^2.6.9",
+    "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.2.1"
   }
 }
