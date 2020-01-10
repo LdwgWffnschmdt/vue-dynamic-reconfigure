@@ -742,7 +742,7 @@ var __vue_staticRenderFns__$6 = [];
     undefined,
     undefined,
     undefined
-  );/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,RosDynamicReconfigureList: __vue_component__$6,RosDynamicReconfigureNode: __vue_component__$5});// Import vue components
+  );/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,RosDynamicReconfigureList: __vue_component__$6,RosDynamicReconfigureNode: __vue_component__$5,RosDynamicReconfigureBool: __vue_component__$3,RosDynamicReconfigureDouble: __vue_component__$4,RosDynamicReconfigureEnum: __vue_component__,RosDynamicReconfigureInt: __vue_component__$2,RosDynamicReconfigureStr: __vue_component__$1});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -768,4 +768,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.RosDynamicReconfigureList=__vue_component__$6;exports.RosDynamicReconfigureNode=__vue_component__$5;exports.default=plugin;
+}exports.RosDynamicReconfigureBool=__vue_component__$3;exports.RosDynamicReconfigureDouble=__vue_component__$4;exports.RosDynamicReconfigureEnum=__vue_component__;exports.RosDynamicReconfigureInt=__vue_component__$2;exports.RosDynamicReconfigureList=__vue_component__$6;exports.RosDynamicReconfigureNode=__vue_component__$5;exports.RosDynamicReconfigureStr=__vue_component__$1;exports.default=plugin;
