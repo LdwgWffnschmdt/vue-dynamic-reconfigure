@@ -1,6 +1,6 @@
 {
   "name": "vue-dynamic-reconfigure",
-  "version": "0.1.4",
+  "version": "0.1.7",
   "description": "Vue components for ROS dynamic_reconfigure",
   "homepage": "https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure",
   "repository": {
@@ -14,9 +14,7 @@
     "dynamic_reconfigure"
   ],
   "author": "Ludwig Waffenschmidt <ludwig.waffenschmidt@outlook.com>",
-  "main": "dist/vue-dynamic-reconfigure.ssr.js",
-  "module": "dist/vue-dynamic-reconfigure.esm.js",
-  "unpkg": "dist/vue-dynamic-reconfigure.min.js",
+  "main": "dist/vue-dynamic-reconfigure.common.js",
   "files": [
     "dist/*",
     "src/**/*.vue",
@@ -26,10 +24,7 @@
   "scripts": {
     "serve": "vue-cli-service serve ./src/main.js",
     "build-demo": "vue-cli-service build --dest demo ./src/main.js",
-    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
-    "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
-    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+    "build": "vue-cli-service build --target lib src/plugin.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
