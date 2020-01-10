@@ -21,6 +21,7 @@ jobs:
         npm install
         echo Building ...
         npm run build
+    - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > ~/.npmrc
     - name: Publish version
       uses: geoblink/publish-to-npm@v1.0.2
       env:
