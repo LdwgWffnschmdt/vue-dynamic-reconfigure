@@ -14,16 +14,15 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@master
       with:
-        node-version: 10.0.0
+        node-version: 12.0.0
     - name: Build
       run: |
         echo Installing dependencies ...
         npm install
         echo Building ...
         npm run build
-    - name: Publish if version has been updated
-      if: success()
-      uses: pascalgn/npm-publish-action@51fdb4531e99aac1873764ef7271af448dc42ab4
-      env: # More info about the environment variables in the README
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
-        NPM_AUTH_TOKEN: ${{ secrets.NPM }} # You need to set this in your repo settings
+    - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > ~/.npmrc
+    - name: Publish version
+      uses: geoblink/publish-to-npm@v1.0.2
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You must set this in your repo settings
