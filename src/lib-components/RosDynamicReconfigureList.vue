@@ -184,7 +184,7 @@ export default {
 </script>
 
 <style scoped>
-.ros-dynamic-reconfigure-breadcrumbs .v-btn {
+.ros-dynamic-reconfigure-breadcrumbs >>> .v-btn {
   min-width: 28px;
 }
 </style>

@@ -1,6 +1,6 @@
 {
   "name": "vue-dynamic-reconfigure",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Vue components for ROS dynamic_reconfigure",
   "homepage": "https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure",
   "repository": {

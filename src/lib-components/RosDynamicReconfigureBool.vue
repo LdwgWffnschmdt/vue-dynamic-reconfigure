@@ -5,6 +5,7 @@
     :persistent-hint="true"
     v-on:change="change"
     v-model="value.value"
+    class="ma-0"
   ></v-checkbox>
 </template>
 

@@ -1,19 +1,51 @@
 <template>
-  <v-card elevation="0">
-    <v-form v-if="groups">
-      <v-container pa-2 v-for="(group, index) in groups" :key="index">
-        <v-layout row wrap>
-          <v-subheader v-if="groups.length > 1">{{group.name}}</v-subheader>
-          
-          <v-flex xs12 sm12 px-3 v-for="(parameter, index) in group.parameters" :key="index">
-            <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="group.parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
-            <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="group.parameters[index]" v-on:change="change"></div>
-          </v-flex>
+  <div v-if="groups">
+    <v-tabs
+      v-if="groups.length > 1"
+      show-arrows
+    >
+      <v-tabs-slider color="primary"></v-tabs-slider>
 
-        </v-layout>
-      </v-container>
-    </v-form>
-  </v-card>
+      <v-tab
+        v-for="(group, index) in groups"
+        :key="index"
+        :href="'#tab-' + index"
+      >
+        {{ group.name }}
+      </v-tab>
+
+      <v-tabs-items>
+        <v-tab-item
+          v-for="(group, index) in groups"
+          :key="index"
+          :value="'tab-' + index"
+        >
+          <v-container px-0 py-3>
+            <v-layout row wrap v-for="(parameter, index) in group.parameters" :key="index">
+              <v-flex xs12 sm12 px-0 my-2 v-if="index !== 0" :key="`${index}-divider`">
+                <v-divider/>
+              </v-flex>
+              <v-flex xs12 sm12 px-3>
+                <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="group.parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
+                <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="group.parameters[index]" v-on:change="change"></div>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-tabs>
+    <v-container v-else px-0 py-3>
+      <v-layout row wrap v-for="(parameter, index) in groups[0].parameters" :key="index">
+        <v-flex xs12 sm12 px-0 my-2 v-if="index !== 0" :key="`${index}-divider`">
+          <v-divider/>
+        </v-flex>
+        <v-flex xs12 sm12 px-3>
+          <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="groups[0].parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
+          <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="groups[0].parameters[index]" v-on:change="change"></div>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>

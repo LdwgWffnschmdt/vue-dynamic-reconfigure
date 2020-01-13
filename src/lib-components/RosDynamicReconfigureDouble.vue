@@ -64,37 +64,37 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .ros-dynamic-reconfigure-slider {
   margin-top: -12px;
   margin-bottom: -20px;
 }
 
-.ros-dynamic-reconfigure-slider .v-text-field__details {
+.ros-dynamic-reconfigure-slider >>> .v-text-field__details {
   position: absolute;
   left: 0;
   top: 75%;
 }
 
-.ros-dynamic-reconfigure-slider .name {
+.ros-dynamic-reconfigure-slider >>> .name {
   font-size: 12px;
   font-weight: 400;
   position: relative;
   top: 12px;
 }
 
-.ros-dynamic-reconfigure-slider .description {
+.ros-dynamic-reconfigure-slider >>> .description {
   font-size: 12px;
   top: -12px;
   opacity: 0;
 }
 
-.ros-dynamic-reconfigure-slider .theme--light .name,
-.ros-dynamic-reconfigure-slider .theme--light .description {
+.ros-dynamic-reconfigure-slider >>> .theme--light .name,
+.ros-dynamic-reconfigure-slider >>> .theme--light .description {
   color: rgba(0,0,0,0.54);
 }
-.ros-dynamic-reconfigure-slider .theme--dark .name,
-.ros-dynamic-reconfigure-slider .theme--dark .description {
+.ros-dynamic-reconfigure-slider >>> .theme--dark .name,
+.ros-dynamic-reconfigure-slider >>> .theme--dark .description {
     color: rgba(255,255,255,0.7);
 }
 </style>
