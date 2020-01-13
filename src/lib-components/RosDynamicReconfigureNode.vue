@@ -1,7 +1,7 @@
 <template>
-  <v-card>
+  <v-card elevation="0">
     <v-form v-if="groups">
-      <v-container v-for="(group, index) in groups" :key="index">
+      <v-container pa-2 v-for="(group, index) in groups" :key="index">
         <v-layout row wrap>
           <v-subheader v-if="groups.length > 1">{{group.name}}</v-subheader>
           

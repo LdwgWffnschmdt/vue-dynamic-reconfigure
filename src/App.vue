@@ -1,9 +1,22 @@
 <template>
-  <v-app>
+  <v-app :dark="dark">
+    <v-toolbar class="elevation-0">
+      <v-toolbar-title>vue-dynamic-reconfigure Demo</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon v-if="connected" @click="ros.close()">
+        <v-icon>exit_to_app</v-icon>
+      </v-btn>
+      <v-btn icon @click="dark = !dark">
+        <v-icon>invert_colors</v-icon>
+      </v-btn>
+      <v-btn icon href="https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure">
+        <v-icon>code</v-icon>
+      </v-btn>
+    </v-toolbar>
     <v-content>
       <v-card
         v-if="connected"
-        elevation="0"
+        elevation="5"
         class="my-4 mx-auto"
         color="transparent"
         max-width="600"
@@ -18,6 +31,7 @@
         max-width="400"
       >
         <div>Please enter your robot's websocket address below. Since this page is served via HTTPS, only scure websockets over WSS are supported.</div>
+        <br/>
         <v-text-field
           color="primary"
           v-model="address"
@@ -38,7 +52,7 @@
 
 <script>
 import ROSLIB from 'roslib';
-import { RosDynamicReconfigureList } from './entry';
+import { RosDynamicReconfigureList } from './plugin';
 
 export default {
   name:  'App', // vue library dev component
@@ -50,7 +64,8 @@ export default {
     address: "wss://localhost:9090",
     connected: false,
     connecting: false,
-    error: ""
+    error: "",
+    dark: false
   }),
   mounted() {
     this.ros = new ROSLIB.Ros();
