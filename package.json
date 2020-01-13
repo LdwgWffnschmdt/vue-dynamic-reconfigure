@@ -1,12 +1,13 @@
 {
   "name": "vue-dynamic-reconfigure",
-  "version": "0.1.8",
+  "version": "1.0.0",
   "description": "Vue components for ROS dynamic_reconfigure",
   "homepage": "https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure",
   "repository": {
     "type": "git",
     "url": "https://github.com/LdwgWffnschmdt/vue-dynamic-reconfigure"
   },
+  "license": "MIT",
   "keywords": [
     "vue",
     "vuejs",
@@ -22,7 +23,7 @@
     "!src/main.vue"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve ./src/main.js",
+    "serve": "vue-cli-service serve",
     "build-demo": "vue-cli-service build --dest demo ./src/main.js",
     "build": "vue-cli-service build --target lib src/plugin.js"
   },
@@ -36,22 +37,12 @@
     "vuetify": "^1.5.22"
   },
   "devDependencies": {
-    "cross-env": "^6.0.3",
-    "minimist": "^1.2.0",
-    "rollup": "^1.26.1",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-vue": "5.1.1",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",

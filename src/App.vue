@@ -30,7 +30,7 @@
         color="transparent"
         max-width="400"
       >
-        <div>Please enter your robot's websocket address below. Since this page is served via HTTPS, only scure websockets over WSS are supported.</div>
+        <div>Please enter your robot's websocket address below. Since this page is served via HTTPS, only secure websockets over WSS might be supported.</div>
         <br/>
         <v-text-field
           color="primary"
