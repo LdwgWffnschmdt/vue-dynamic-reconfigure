@@ -32,19 +32,21 @@
       >
         <div>Please enter your robot's websocket address below. Since this page is served via HTTPS, only secure websockets over WSS might be supported.</div>
         <br/>
-        <v-text-field
-          color="primary"
-          v-model="address"
-          :append-icon="connecting ? '' : 'send'"
-          @click:append="connect"
-          outline
-          clearable
-          label="Address"
-          type="text"
-          :loading="connecting"
-          :error-messages="error"
-        >
+        <v-form @submit.prevent="connect">
+          <v-text-field
+            color="primary"
+            v-model="address"
+            :append-icon="connecting ? '' : 'send'"
+            @click:append="connect"
+            outline
+            clearable
+            label="Address"
+            type="text"
+            :loading="connecting"
+            :error-messages="error"
+          >
         </v-text-field>
+        </v-form>
       </v-card>
     </v-content>
   </v-app>

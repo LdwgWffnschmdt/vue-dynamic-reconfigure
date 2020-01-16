@@ -1,50 +1,72 @@
 <template>
-  <div v-if="groups">
-    <v-tabs
-      v-if="groups.length > 1"
-      show-arrows
-    >
-      <v-tabs-slider color="primary"></v-tabs-slider>
+  <div>
+    <div v-if="loading" class="text-xs-center">
+      <v-progress-circular class="my-3"
+        indeterminate
+        color="primary"
+      ></v-progress-circular>
+    </div>
+    <div v-if="groups && groups.length > 0">
+      <v-container v-if="defaultGroup && defaultGroup.parameters.length > 0" px-0 py-3>
+        <v-layout row wrap v-for="(parameter, index) in defaultGroup.parameters" :key="index">
+          <v-flex xs12 sm12 px-0 my-2 v-if="index !== 0" :key="`${index}-divider`">
+            <v-divider/>
+          </v-flex>
+          <v-flex xs12 sm12 px-3>
+            <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="defaultGroup.parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
+            <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="defaultGroup.parameters[index]" v-on:change="change"></div>
+          </v-flex>
+        </v-layout>
+      </v-container>
 
-      <v-tab
-        v-for="(group, index) in groups"
-        :key="index"
-        :href="'#tab-' + index"
+      <v-tabs
+        v-if="tabs.length > 0"
       >
-        {{ group.name }}
-      </v-tab>
-
-      <v-tabs-items>
-        <v-tab-item
-          v-for="(group, index) in groups"
+        <v-tabs-slider color="primary"></v-tabs-slider>
+        
+        <v-tab
+          v-for="(group, index) in tabs"
           :key="index"
-          :value="'tab-' + index"
+          :href="'#tab-' + index"
         >
-          <v-container px-0 py-3>
-            <v-layout row wrap v-for="(parameter, index) in group.parameters" :key="index">
-              <v-flex xs12 sm12 px-0 my-2 v-if="index !== 0" :key="`${index}-divider`">
-                <v-divider/>
-              </v-flex>
-              <v-flex xs12 sm12 px-3>
-                <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="group.parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
-                <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="group.parameters[index]" v-on:change="change"></div>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-tab-item>
-      </v-tabs-items>
-    </v-tabs>
-    <v-container v-else px-0 py-3>
-      <v-layout row wrap v-for="(parameter, index) in groups[0].parameters" :key="index">
-        <v-flex xs12 sm12 px-0 my-2 v-if="index !== 0" :key="`${index}-divider`">
-          <v-divider/>
-        </v-flex>
-        <v-flex xs12 sm12 px-3>
-          <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="groups[0].parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
-          <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="groups[0].parameters[index]" v-on:change="change"></div>
-        </v-flex>
-      </v-layout>
-    </v-container>
+          {{ group.name }}
+        </v-tab>
+
+        <v-tabs-items>
+          <v-tab-item
+            v-for="(group, index) in tabs"
+            :key="index"
+            :value="'tab-' + index"
+          >
+            <v-container px-0 py-3>
+              <v-layout row wrap v-for="(parameter, index) in group.parameters" :key="index">
+                <v-flex xs12 sm12 px-0 my-2 v-if="index !== 0" :key="`${index}-divider`">
+                  <v-divider/>
+                </v-flex>
+                <v-flex xs12 sm12 px-3>
+                  <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="group.parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
+                  <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="group.parameters[index]" v-on:change="change"></div>
+                </v-flex>
+              </v-layout>
+            </v-container>
+            <div v-if="groups.filter(g => g.parent == group.id).length > 0">
+              <v-container px-0 py-3 v-for="(subGroup, index) in groups.filter(g => g.parent == group.id)" :key="index">
+                <v-subheader>{{ subGroup.name }}</v-subheader>
+                <v-layout row wrap v-for="(parameter, index) in subGroup.parameters" :key="index">
+                  <v-flex xs12 sm12 px-0 my-2 v-if="index !== 0" :key="`${index}-divider`">
+                    <v-divider/>
+                  </v-flex>
+                  <v-flex xs12 sm12 px-3>
+                    <ros-dynamic-reconfigure-enum v-if="parameter.edit_method != ''" v-model="subGroup.parameters[index]" v-on:change="change"></ros-dynamic-reconfigure-enum>
+                    <div v-else :is="'ros-dynamic-reconfigure-' + parameter.type" v-model="subGroup.parameters[index]" v-on:change="change"></div>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </div>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-tabs>
+    </div>
   </div>
 </template>
 
@@ -77,13 +99,22 @@ export default {
     }
   },
   watch: {
-    topic() {
+    node() {
       this.$nextTick(this.reload);
     }
   },
   data: () => ({
-    groups: []
+    groups: [],
+    loading: false
   }),
+  computed: {
+    defaultGroup() {
+      return this.groups.filter(g => g.parent == 0 && g.type == '' && g.name == "Default")[0] || null;
+    },
+    tabs() {
+      return this.groups.filter(g => g.parent == 0 && g.type == 'tab');
+    }
+  },
   mounted() {
     this.reload();
   },
@@ -93,6 +124,9 @@ export default {
         this.parameterUpdatesTopic.unsubscribe();
         this.parameterUpdatesTopic = undefined;
       }
+
+      this.groups = [];
+      this.loading = true;
 
       this.parameterUpdatesTopic = new ROSLIB.Topic({
         ros: this.ros,
@@ -171,6 +205,7 @@ export default {
           // Directly unsubscribe again, we don't need this anymore
           this.parameterDescriptionsTopic.unsubscribe();
           this.parameterDescriptionsTopic = undefined;
+          this.loading = false;
         });
       }
     },

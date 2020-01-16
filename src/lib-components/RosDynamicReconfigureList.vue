@@ -37,7 +37,7 @@
       <v-slide-y-transition
         leave-absolute
         group
-        tag="v-list"
+        tag="v-list" class="pa-0"
       >
         <template v-for="(subNode, subNodeName, i) in currentNode">
           <v-divider
